@@ -14,7 +14,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 
 @Entity
 //@SecondaryTable(name = "questions", pkJoinColumns = @PrimaryKeyJoinColumn(name = "courseId", referencedColumnName = "courseId"))
@@ -27,6 +30,8 @@ public class Course {
 	private String courseName;
 	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JsonManagedReference
+	//@LazyToOne(LazyToOneOption.NO_PROXY)
+	@JsonIgnore
 	private Set<Topics> topics=new HashSet<Topics>();
 
 	public long getCourseId() {

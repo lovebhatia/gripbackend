@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -31,14 +32,20 @@ public class SubTopics implements Serializable {
 	@Column(name = "sub_topic_year")
 	private String SubTopicYear;
 	
-	@OneToMany(mappedBy = "subTopics", orphanRemoval = true,cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-	@JsonManagedReference
+	@OneToMany(mappedBy = "subTopics",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	//@JsonManagedReference
+	@JsonIgnore
 	private Set<Questions> questionsSet=new HashSet<Questions>();
 	
 	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name="topic_id")
 	@JsonBackReference
 	private Topics topics;
+
+	@Column
+	private int index=0;
+	@Column
+	private int dashboardFlag=0;
 
 	public long getSubTopicId() {
 		return subTopicId;
@@ -79,8 +86,24 @@ public class SubTopics implements Serializable {
 	public void setTopics(Topics topics) {
 		this.topics = topics;
 	}
+
 	
 
+	public int getDashboardFlag() {
+		return dashboardFlag;
+	}
+
+	public void setDashboardFlag(int dashboardFlag) {
+		this.dashboardFlag = dashboardFlag;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
 }
 
 

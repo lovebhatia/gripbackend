@@ -24,7 +24,7 @@ import com.example.demo.repository.UserRepository;
 
 import javax.transaction.Transactional;
 
-@Service("userService")
+//@Service("userService")
 public class UserCrackService  {
 	
 	/*@Autowired

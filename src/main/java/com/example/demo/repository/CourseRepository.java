@@ -11,6 +11,10 @@ import org.springframework.data.jpa.repository.Query;
 import com.example.demo.model.Course;
 
 public interface CourseRepository extends JpaRepository<Course, Long> {
+
+	@Query("select c.courseId as courseId,c.courseName as CourseName from Course c")
+	List<Course> getCourse();
+
 	@Query("SELECT courseName,courseId as courseName FROM Course")
 	List<String> findAllCourses();
 

@@ -5,10 +5,10 @@ import com.example.demo.model.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService1 {
     User save(User user);
 
     User findByUsername(String username);
 
-    List<String> findUsers(List<Long> idList);
+    //List<String> findUsers(List<Long> idList);
 }

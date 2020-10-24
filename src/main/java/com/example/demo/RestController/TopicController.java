@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -99,6 +100,27 @@ public class TopicController {
         return topicRepository.findById(id);
     }
 
+
+    @GetMapping(value="topic/{id}/setDashboard")
+    public ResponseEntity<Long> setDashboard(@PathVariable(value="id") Long id)
+    {
+
+        topicRepository.dashboardFlagSet(id);
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value="topic/{id}/unsetDashboard")
+    public ResponseEntity<Long> unsetDashboard(@PathVariable(value="id") Long id)
+    {
+        topicRepository.dashboardFlagUnset(id);
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping(value="topic/{id}/index/{n}")
+    public ResponseEntity<Long> setIndex(@PathVariable(value="id") Long id,@PathVariable(value="id") Long n)
+    {
+        topicRepository.setIndex(id,n);
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 }

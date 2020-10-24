@@ -1,6 +1,5 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Service.UserService;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 
@@ -24,13 +23,13 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
-@RestController
-@RequestMapping("/crack")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+//@RestController
+//@RequestMapping("/crack")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController extends ResponseEntityExceptionHandler {
 
-    @Autowired
-    public UserService userService;
+    //@Autowired
+    //public UserService userService;
 
     //@Autowired
     //private DiscoveryClient discoveryClient;
@@ -59,7 +58,7 @@ public class UserController extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(discoveryClient.getServices(), HttpStatus.OK);
     }
 */
-
+/*
     @PostMapping("/registration")
     public ResponseEntity<?> saveUser(@RequestBody User user) {
         System.out.println("In registration method");
@@ -67,7 +66,7 @@ public class UserController extends ResponseEntityExceptionHandler {
             //status code :409
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        user.setRole(Role.User);
+        //user.setRole(Role.User);
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 
@@ -94,4 +93,6 @@ public class UserController extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> test() {
         return ResponseEntity.ok("It is working...");
     }
+}
+*/
 }

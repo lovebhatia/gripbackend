@@ -7,6 +7,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,8 +60,24 @@ public class SubTopicController {
 
 	}
 
+	@GetMapping(value="subtopic/{id}/setDashboard")
+	public ResponseEntity<Long> setDashboard(@PathVariable(value="id") Long id)
+	{
+		subTopicRepository.dashboardFlagSet(id);
+		return  new ResponseEntity<>(HttpStatus.OK);
+	}
 
-
-
+	@GetMapping(value="subtopic/{id}/unsetDashboard")
+	public ResponseEntity<Long> unsetDashboard(@PathVariable(value="id") Long id)
+	{
+		subTopicRepository.dashboardFlagUnset(id);
+		return  new ResponseEntity<>(HttpStatus.OK);
+	}
+	@GetMapping(value="subtopic/{id}/index/{n}")
+	public ResponseEntity<Long> setIndex(@PathVariable(value="id") Long id,@PathVariable(value="id") Long n)
+	{
+		subTopicRepository.setIndex(id,n);
+		return  new ResponseEntity<>(HttpStatus.OK);
+	}
 }
 

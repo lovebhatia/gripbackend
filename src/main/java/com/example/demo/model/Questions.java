@@ -35,16 +35,34 @@ public class Questions implements Serializable {
 	@Column(name="likes")
 	public int likes;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="sub_topic_id")
-	@JsonBackReference
+	//@JsonBackReference
 	private SubTopics subTopics;
 
 	@Column
 	private Long courseId;
+	@Column
+	private String courseName;
+
+	@Column
+	private Long topicId;
+	@Column
+	private String topicName;
+	@Column
+	private Long subSubTopicId;
+	@Column
+	private String subTopicName;
+	@Column
+	private int index=0;
+	@Column
+	private int dashboardFlag=0;
 	
 	@Column(name="flag",length = 2)
 	private String flag;
+
+	@Column(name = "expanded", columnDefinition = "boolean default false")
+	private boolean expanded = false;
 
 	@OneToMany(mappedBy = "questions",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JsonManagedReference
@@ -108,5 +126,66 @@ public class Questions implements Serializable {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+	public Long getTopicId() {
+		return topicId;
+	}
+	public void setTopicId(Long topicId) {
+		this.topicId = topicId;
+	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public String getTopicName() {
+		return topicName;
+	}
+
+	public void setTopicName(String topicName) {
+		this.topicName = topicName;
+	}
+
+	public Long getSubSubTopicId() {
+		return subSubTopicId;
+	}
+
+	public void setSubSubTopicId(Long subSubTopicId) {
+		this.subSubTopicId = subSubTopicId;
+	}
+
+	public String getSubTopicName() {
+		return subTopicName;
+	}
+
+	public void setSubTopicName(String subTopicName) {
+		this.subTopicName = subTopicName;
+	}
+	public boolean isExpanded() {
+		return expanded;
+	}
+	public void setExpanded(boolean expanded) {
+		this.expanded = expanded;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	public int getDashboardFlag() {
+		return dashboardFlag;
+	}
+
+	public void setDashboardFlag(int dashboardFlag) {
+		this.dashboardFlag = dashboardFlag;
+	}
+
 	
 }

@@ -15,21 +15,28 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
 
+    public UserDetailServiceImpl(UserRepository users) {
+        this.userRepository = users;
+    }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username).orElse(null);
+        return this.userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username: " + username + " not found"));
+       /* User user = userRepository.findByUsername(username).orElse(null);
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
-        Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
+        //Set<GrantedAuthority> authorities = new HashSet<>();
+        //authorities.add(new SimpleGrantedAuthority(user.getRoles());
 
         return new org.springframework.security.core.userdetails.User(username, user.getPassword(), authorities);
-    }
+    */}
 }
+

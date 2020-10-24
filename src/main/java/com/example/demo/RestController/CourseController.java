@@ -1,13 +1,16 @@
 package com.example.demo.RestController;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import javax.transaction.Transactional;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +42,7 @@ public class CourseController {
     {
         return courseRepository.save(language);
     }
-
+    @Transactional
     @GetMapping(value= "/course")
     @CrossOrigin("http://localhost:4200")
     @Produces(MediaType.APPLICATION_JSON)
@@ -52,14 +55,26 @@ public class CourseController {
     @GetMapping(value="/courses")
     public ResponseEntity<List<String>> getAllCourses()
     {
+        System.out.println("test");
         List<String> courses= courseRepository.findAllCourses();
+        /*List<Map<String,String>> result = courses.stream()
+                .map(arr->{
+                    Map<String,String> map = new HashMap<>();
+                    map.put("name",arr[0]);
+                    map.put("id",arr[1]);
+                    return map;
+                })
+                .collect(Collectors.toList());
+
+        */
         return ResponseEntity.ok(courses);
     }
 
     @GetMapping(value="/courses1")
-    public List<String> getAllCourses1()
+    public List<Course> getAllCourses1()
     {
-        return questionService.getAllCourses();
+        //return questionService.getAllCourses();
+        return (List<Course>) courseRepository.getCourse();
     }
 
     @GetMapping(value= "/course/{id}")
@@ -71,7 +86,8 @@ public class CourseController {
 
 
     @GetMapping(value="/truncate")
-    public String truncateTable() throws Exception
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public String truncateTable()
     {
         truncateDs.truncate();
         return "test";

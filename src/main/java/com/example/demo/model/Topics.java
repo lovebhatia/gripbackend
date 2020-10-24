@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,12 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 
 @Entity
 public class Topics {
+	public Topics(){}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,14 +29,24 @@ public class Topics {
 	@Column(name = "topic_name")
 	private String topicName;
 
-	@OneToMany(mappedBy = "topics", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@Column(name = "expanded", columnDefinition = "boolean default false")
+	private boolean expanded = false;
+
+	@OneToMany(mappedBy = "topics", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JsonManagedReference
+	@JsonIgnore
+
 	private Set<SubTopics> topicsSet=new HashSet<SubTopics>();
 
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="courseId")
 	@JsonBackReference
 	private Course course;
+
+	@Column
+	private int index=0;
+	@Column
+	private int dashboardFlag=0;
 
 	public long getTopicId() {
 		return topicId;
@@ -61,6 +73,30 @@ public class Topics {
 		this.topicsSet = topicsSet;
 	}
 
+	public boolean isExpanded() {
+		return expanded;
+	}
 
+	public void setExpanded(boolean expanded) {
+		this.expanded = expanded;
+	}
+
+	
+
+	public int getDashboardFlag() {
+		return dashboardFlag;
+	}
+
+	public void setDashboardFlag(int dashboardFlag) {
+		this.dashboardFlag = dashboardFlag;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
 }
 

@@ -48,6 +48,11 @@ public class QuestionAnswerService{
 		return courseNames;
 	}
 
+
+
+
+
+
 	public HashMap<Long,Topics> getTopicbySelectedTopic(final Long courseId,final Long topicId)
 	{
 		final CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -111,6 +116,24 @@ public class QuestionAnswerService{
 			return null;
 		}
 	}
+
+	public List<Questions> getQuestionsbyTopic(final Long id) {
+		final CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		final CriteriaQuery<Questions> criteria = builder.createQuery(Questions.class);
+		final Root<Questions> from = criteria.from(Questions.class);
+		criteria.select(from);
+		//criteria.where(builder.equal(from.get())));
+		//criteria.where(builder.equal(from.get("courseId"));
+		final TypedQuery<Questions> typed = entityManager.createQuery(criteria);
+		final List<Questions> courseNames = (List<Questions>)typed.getResultList();
+		try {
+			return courseNames;
+			//return (List<Questions>) typed.getSingleResult();
+		} catch (final NoResultException nre) {
+			return null;
+		}
+	}
+
 
 
 	public List<Questions> getQuestionsbyCourse1(final Long id)

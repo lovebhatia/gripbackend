@@ -13,9 +13,9 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
- import org.springframework.security.config.annotation.web.builders.WebSecurity;
- import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
- import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,10 +32,11 @@ import org.springframework.web.filter.CorsFilter;
 
  import javax.annotation.Resource;
 import javax.sql.DataSource;
- 
+ /*
  @Configuration
- @EnableWebSecurity 
- //@EnableGlobalMethodSecurity(prePostEnabled = true)
+ @EnableWebSecurity
+ @EnableGlobalMethodSecurity(prePostEnabled = true)
+
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter 
  {
      /*
@@ -47,8 +48,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 
 	   @Value("${security.security-realm}")
 	   private String securityRealm;
-     */
-     @Qualifier("userDetailServiceImpl")
+
+      @Qualifier("userDetailServiceImpl")
 	   @Autowired
 	   private UserDetailsService userDetailsService;
 	   
@@ -66,7 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 	   protected AuthenticationManager authenticationManager() throws Exception {
 	      return super.authenticationManager();
 	   }
-     */
+
 	   @Override
 	   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	      auth.userDetailsService(userDetailsService)
@@ -92,7 +93,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
                 //.antMatchers(HttpMethod.OPTIONS,"/oauth/token").permitAll()
                 //.antMatchers("/api-docs/**").permitAll();
      }
-     */
+
 
 
 
@@ -149,6 +150,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
         defaultTokenServices.setSupportRefreshToken(true);
         return defaultTokenServices;
      }
-     */
+
 
  }
+     */

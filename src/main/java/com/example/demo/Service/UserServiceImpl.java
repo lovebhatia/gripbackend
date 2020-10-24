@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService1 {
 
     @Autowired
     private UserRepository userRepository;
     //we will create bean for it in security config.
-    @Autowired
+    //@Autowired
     private PasswordEncoder passwordEncoder;
 
     public User save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        //user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -29,9 +29,9 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    @Override
-    public List<String> findUsers(List<Long> idList) {
-        return userRepository.findByIdList(idList);
-    }
+   // @Override
+    //public List<String> findUsers(List<Long> idList) {
+        //return userRepository.findByIdList(idList);
+    //}
 
 }

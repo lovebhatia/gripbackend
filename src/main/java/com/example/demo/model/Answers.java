@@ -26,7 +26,8 @@ public class Answers {
 	//@JsonIgnore
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name = "question_id")
-	@JsonBackReference private Questions questions;
+	@JsonBackReference
+	private Questions questions;
 
 
 	public long getId() {

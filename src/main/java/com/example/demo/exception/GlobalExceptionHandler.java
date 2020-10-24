@@ -24,4 +24,14 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(errorDetails,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+
+	@ExceptionHandler(CustomException.class)
+	public final ResponseEntity<Object> handleAllExceptions(CustomException ex) {
+		CustomException exceptionResponse =
+				new CustomException(
+						ex.getMessage(), ex.getDetails(), ex.getHint(), ex.getNextActions(), ex.getSupport());
+		return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+
 }

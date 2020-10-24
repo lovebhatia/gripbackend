@@ -23,10 +23,11 @@ public class TruncateDatabaseService {
         this.entityManager = entityManager;
     }
 
-    @Transactional
-    public void truncate() throws Exception {
-        List<String> tableNames = new ArrayList();
-        Session session = entityManager.unwrap(Session.class);
+    //@Transactional
+    public void truncate(){
+       // List<String> tableNames = new ArrayList();
+       // Session session = entityManager.unwrap(Session.class);
+        System.out.println("In Truncated method");
         //Map<String, ClassMetadata> hibernateMetadata = session.getSessionFactory().getMetamodel();
 
         /*for (ClassMetadata classMetadata : hibernateMetadata.values()) {
@@ -34,10 +35,10 @@ public class TruncateDatabaseService {
             tableNames.add(aep.getTableName());
         }
 */
-        entityManager.flush();
-        entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY FALSE").executeUpdate();
-        tableNames.forEach(tableName -> entityManager.createNativeQuery("TRUNCATE TABLE " + tableName).executeUpdate());
-        entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY TRUE").executeUpdate();
+        //entityManager.flush();
+        //entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY FALSE").executeUpdate();
+        //tableNames.forEach(tableName -> entityManager.createNativeQuery("TRUNCATE TABLE " + tableName).executeUpdate());
+        //entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY TRUE").executeUpdate();
     }
 
 }
