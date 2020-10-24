@@ -42,9 +42,9 @@ public class CourseController {
     {
         return courseRepository.save(language);
     }
+
     @Transactional
     @GetMapping(value= "/course")
-    @CrossOrigin("http://localhost:4200")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Course> getAllsubject()
     {
@@ -93,8 +93,5 @@ public class CourseController {
         return "test";
 
     }
-
-
-
 }
 
