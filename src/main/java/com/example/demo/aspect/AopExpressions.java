@@ -19,7 +19,6 @@ public class AopExpressions  {
     @Pointcut("execution(* com.example.demo.Service.*.set*(..))")
     public void setter(){}
 
-    //create pointcut: include package ..exclude  getter setter
     @Pointcut("forServicePackage() && !(getter() || setter())")
     public void forServicePackageNoGetterSetter() {}
 }
