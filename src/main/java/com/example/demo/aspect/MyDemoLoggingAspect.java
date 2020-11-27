@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
-/*
+
 @Aspect
 @Component
 public class MyDemoLoggingAspect {
@@ -17,6 +17,7 @@ public class MyDemoLoggingAspect {
     public void beforeAddAccountAdvicePointCutNoGetterSetter(JoinPoint joinPoint) {
         System.out.println("Executing with point cutAOP "+joinPoint.getSignature().getName());
     }
+    
     @Before("com.example.demo.aspect.AopExpressions.forServicePackage()")
     public void beforeAddAccountAdvicePointCut(JoinPoint joinPoint) {
         System.out.println("Executing with point cutAOP "+joinPoint.getSignature().getName());
@@ -34,7 +35,7 @@ public class MyDemoLoggingAspect {
         }
     }
 
-    //Add a new advice for @after returning
+  //Add a new advice for @after returning
     @AfterReturning(
             pointcut = "execution(* com.example.demo.Service.TruncateDatabaseService.truncate())",
            returning ="result"
@@ -47,35 +48,8 @@ public class MyDemoLoggingAspect {
         //print out results of method call
         System.out.println("Results ==> "+result);
         //convertCourseNamesToUpperCase(result);
-        List<Course> courses=convertCourseNamesToUpperCase(result);
-        courses.forEach(System.out::println);
 
     }
     
-    @AfterThrowing(pointcut = "execution(* com.example.demo.Service.TruncateDatabaseService())",throwing = "theExec")
-    public void afterThrowingCourseNames(JoinPoint joinPoint, Throwable theExec) {
-        String methods=joinPoint.getSignature().toShortString();
-        System.out.println("\n ====> Executing @AfterThrowing on method: "+methods);
-
-        //log the exception
-        System.out.println("\n ===> The exception is: "+ theExec);
-    }
-
-
-    @After("execution(* com.example.demo.Service.TruncateDatabaseService())")
-    public void afterCourseNames(JoinPoint joinPoint) {
-        String methods=joinPoint.getSignature().toShortString();
-        System.out.println("\n ====> Executing @After on method: "+methods);
-    }
-
-    @Around("execution(* com.example.demo.Service.TruncateDatabaseService())")
-    public void afterGetFortune(ProceedingJoinPoint joinPoint) {
-        String methods=joinPoint.getSignature().toShortString();
-        System.out.println("\n ====> Executing @After on method: "+methods);
-    }
-    private  List convertCourseNamesToUpperCase(List<Course> result) {
-       return result.stream().map( course -> course.getCourseName().toUpperCase()).collect(Collectors.toList());
-    }
 
 }
-*/

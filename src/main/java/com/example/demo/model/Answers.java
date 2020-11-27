@@ -24,11 +24,12 @@ public class Answers {
 
 	//cascade = CascadeType.PERSIST
 	//@JsonIgnore
+	/*
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name = "question_id")
 	@JsonBackReference
 	private Questions questions;
-
+	*/
 
 	public long getId() {
 		return ans_id;
@@ -42,7 +43,7 @@ public class Answers {
 	public void setAns(String ans) {
 		this.ans = ans;
 	}
-
+	/*
 	public Questions getQuestions() {
 		return questions;
 	}
@@ -50,4 +51,5 @@ public class Answers {
 	public void setQuestions(Questions questions) {
 		this.questions = questions;
 	}
+	*/
 }

@@ -64,8 +64,8 @@ public class Questions implements Serializable {
 	@Column(name = "expanded", columnDefinition = "boolean default false")
 	private boolean expanded = false;
 
-	@OneToMany(mappedBy = "questions",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@JoinColumn(name = "question_id")
 	private Set<Answers> answers=new HashSet<Answers>();
 
 

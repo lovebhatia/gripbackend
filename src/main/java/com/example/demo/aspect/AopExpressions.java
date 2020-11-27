@@ -3,9 +3,9 @@ package com.example.demo.aspect;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-/*
+
 @Aspect
-public class AopExpressions {
+public class AopExpressions  {
 
     @Pointcut("execution(* com.example.demo.Service.*.*(..))")
     public void forServicePackage(){}
@@ -23,4 +23,3 @@ public class AopExpressions {
     @Pointcut("forServicePackage() && !(getter() || setter())")
     public void forServicePackageNoGetterSetter() {}
 }
-*/

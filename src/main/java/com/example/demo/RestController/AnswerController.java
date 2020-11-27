@@ -37,14 +37,14 @@ public class AnswerController {
 		return answerRepository.save(answer);
 	}
 
-	@PostMapping(value="/question/{id}/answer")
+	/* @PostMapping(value="/question/{id}/answer")
 	public Answers  createAnswer(@PathVariable(value = "id") Long id,@Valid @RequestBody Answers answers )
 	{
 		return questionRepository.findById(id).map(questions -> {
-			answers.setQuestions(questions);
+			//answers.setQuestions(questions);
 			return answerRepository.save(answers);
 		}).orElseThrow(()-> new ResourceNotFoundException("topic id" +id+ "not found"));
-	}
+	} */
 
 	@GetMapping(value = "/question/{id}/answer")
 	@Produces(MediaType.APPLICATION_JSON)

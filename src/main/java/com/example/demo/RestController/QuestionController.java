@@ -167,6 +167,15 @@ public class QuestionController {
 		List<String> questions= questionRepository.findQuestionBySubTopic(subTopicId);
 		return ResponseEntity.ok(questions);
     }
+
+    @DeleteMapping("/question/{id}")
+    public ResponseEntity<Long> deleteQuestion1(@PathVariable(value ="id") Long id)
+    {
+       
+         questionRepository.deleteById(id);
+         return new ResponseEntity<>(HttpStatus.OK);
+
+    }
     
     /*
     public Questions Test(long courseId,long topicId,Questions entity) {
