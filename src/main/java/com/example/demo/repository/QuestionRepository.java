@@ -40,6 +40,16 @@ public interface QuestionRepository extends JpaRepository<Questions,Long> {
     @Modifying
     @Query("update Questions s set s.dashboardFlag = 1 where s.question_id = :id")
     int dashboardFlagUnset(@Param("id") Long id);
+    
+    @Transactional
+    @Modifying
+    @Query("update Questions s set s.matCardFlag = 1 where s.question_id = :id")
+    int matcardFlagSet(@Param("id") Long id);
+    
+    @Transactional
+    @Modifying
+    @Query("update Questions s set s.matCardFlag = 0 where s.question_id = :id")
+    int matcardFlagUnSet(@Param("id") Long id);
 
     @Transactional
     @Modifying
