@@ -3,6 +3,7 @@ package com.example.demo.RestController;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -64,7 +65,10 @@ public class QuestionController {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Questions> getQuesByCourseId(@PathVariable(value = "id") Long id)
     {
-        return questionService.getQuestionsbyCourse(id);
+        List<Questions> questions = questionService.getQuestionsbyCourse(id)
+		  .stream().filter(q -> q.getFlag().equals("1")) .collect(Collectors.toList());
+		 
+        return questions;
     }
 
     @GetMapping(value = "course/topic/{id}/questions")
@@ -85,7 +89,9 @@ public class QuestionController {
     @GetMapping(value="/questions")
     public List<Questions> questions()
     {
-        return questionRepository.findAll();
+    	List<Questions> questions = questionRepository.findAll()
+    			  		.stream().filter(q -> q.getFlag().equals("1")) .collect(Collectors.toList());
+        return questions;
     }
     @GetMapping(value= "/question/{id}")
     @Produces(MediaType.APPLICATION_JSON)
