@@ -63,6 +63,13 @@ public class Questions implements Serializable {
 
 	@Column(name = "expanded", columnDefinition = "boolean default false")
 	private boolean expanded = false;
+	
+	@Column(name = "fileName")
+	private String imageName;
+	
+	@Column(name = "matCardFlag")
+	private String matCardFlag;
+	
 
 	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name = "question_id")
@@ -186,6 +193,17 @@ public class Questions implements Serializable {
 	public void setDashboardFlag(int dashboardFlag) {
 		this.dashboardFlag = dashboardFlag;
 	}
-
+	public String getImageName() {
+		return imageName;
+	}
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+	public String getMatCardFlag() {
+		return matCardFlag;
+	}
+	public void setMatCardFlag(String matCardFlag) {
+		this.matCardFlag = matCardFlag;
+	}
 	
 }

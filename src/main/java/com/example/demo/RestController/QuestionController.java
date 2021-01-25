@@ -36,7 +36,6 @@ import com.example.demo.repository.TopicRepository;
 public class QuestionController {
     @Autowired
     SubTopicRepository subTopicRepository;
-
     @Autowired
     QuestionAnswerService questionService;
     @Autowired
@@ -115,10 +114,8 @@ public class QuestionController {
     @GetMapping(value="question/{id}/delete")
     public ResponseEntity<Long> deleteQuestion(@PathVariable(value ="id") Long id)
     {
-        
-         questionRepository.deleteById(id);
+    	questionRepository.deleteById(id);
          return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
     @GetMapping(value="question/{id}/setDashboard")
@@ -127,6 +124,8 @@ public class QuestionController {
         questionRepository.dashboardFlagSet(id);
         return  new ResponseEntity<>(HttpStatus.OK);
     }
+    
+   
 
     @GetMapping(value="question/{id}/unsetDashboard")
     public ResponseEntity<Long> unsetDashboard(@PathVariable(value="id") Long id)
@@ -135,6 +134,22 @@ public class QuestionController {
         return  new ResponseEntity<>(HttpStatus.OK);
     }
 
+    
+    @GetMapping(value="question/{id}/unSetMatCard")
+    public ResponseEntity<Long> unSetmatCard(@PathVariable(value="id") Long id)
+    {
+        questionRepository.matcardFlagUnSet(id);
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
+    
+    @GetMapping(value="question/{id}/setMatCard")
+    public ResponseEntity<Long> setmatCard(@PathVariable(value="id") Long id)
+    {
+        questionRepository.matcardFlagSet(id);
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
+    
+    
     @GetMapping(value="question/{id}/index/{n}")
     public ResponseEntity<Long> setIndex(@PathVariable(value="id") Long id,@PathVariable(value="n") int n)
     {
@@ -142,8 +157,6 @@ public class QuestionController {
         //questionRepository.updateIndex(id);
         return  new ResponseEntity<>(HttpStatus.OK);
     }
-
-
 
 
     @GetMapping(value="question/show/{id}")
@@ -176,7 +189,6 @@ public class QuestionController {
          return new ResponseEntity<>(HttpStatus.OK);
 
     }
-    
     /*
     public Questions Test(long courseId,long topicId,Questions entity) {
         Course course=CourseRepository.findById(courseId);
@@ -189,6 +201,5 @@ public class QuestionController {
         throw new RuntimeException("Failed to create question");
     }
     */
-
 }
 	
