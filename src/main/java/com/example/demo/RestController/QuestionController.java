@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.example.demo.Service.QuestionService;
 import com.example.demo.exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,11 +39,13 @@ public class QuestionController {
     @Autowired
     SubTopicRepository subTopicRepository;
     @Autowired
-    QuestionAnswerService questionService;
+    QuestionAnswerService questionAnswerService;
     @Autowired
     QuestionRepository questionRepository;
     @Autowired 
     TopicRepository topicRepository;
+    @Autowired
+    QuestionService questionService;
 
 
     @GetMapping(value= "course/topicName/subTopicName/{id}")
@@ -64,7 +67,7 @@ public class QuestionController {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Questions> getQuesByCourseId(@PathVariable(value = "id") Long id)
     {
-        List<Questions> questions = questionService.getQuestionsbyCourse(id)
+        List<Questions> questions = questionAnswerService.getQuestionsbyCourse(id)
 		  .stream().filter(q -> q.getFlag().equals("1")) .collect(Collectors.toList());
 		 
         return questions;
@@ -74,7 +77,7 @@ public class QuestionController {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Questions> getQuesByTopicId(@PathVariable(value = "id") Long id)
     {
-        return questionService.getQuestionsbyTopic(id);
+        return questionAnswerService.getQuestionsbyTopic(id);
     }
 
 
@@ -88,9 +91,9 @@ public class QuestionController {
     @GetMapping(value="/questions")
     public List<Questions> questions()
     {
-    	List<Questions> questions = questionRepository.findAll()
-    			  		.stream().filter(q -> q.getFlag().equals("1")) .collect(Collectors.toList());
-        return questions;
+    	//List<Questions> questions = questionRepository.findAll()
+    			  		//.stream().filter(q -> q.getFlag().equals("1")) .collect(Collectors.toList());
+        return questionService.findAll();
     }
     @GetMapping(value= "/question/{id}")
     @Produces(MediaType.APPLICATION_JSON)
