@@ -53,7 +53,5 @@ public class AnswerController {
 		System.out.println("love");
 		return answerRepository.getAnswerById(id);
 	}
-
-
 }
 

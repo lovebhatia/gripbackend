@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "questions")
 public class Questions implements Serializable {
 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "question_id")
@@ -76,6 +77,14 @@ public class Questions implements Serializable {
 	private Set<Answers> answers=new HashSet<Answers>();
 
 
+	public Questions() {
+
+	}
+	public Questions(String questionName, int year, int likes) {
+		this.questions_name = questionName;
+		this.year = year;
+		this.likes = likes;
+	}
 	//@OneToMany(mappedBy = "questions",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	//@JsonManagedReference
 	//private Set<DBFile> dbFiles =new HashSet<DBFile>();

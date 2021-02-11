@@ -15,12 +15,8 @@ public class CrackInterviewApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		
 		//ArrayList<?> result = new ArrayList<Number>();
 	    //ArrayList<Integer> content = new ArrayList<Integer>();
 		//ExecutorService service=Executors.newSingleThreadExecutor(5);
-		
-		
 	}
-
 }
