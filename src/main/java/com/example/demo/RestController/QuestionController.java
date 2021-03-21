@@ -68,7 +68,7 @@ public class QuestionController {
     public List<Questions> getQuesByCourseId(@PathVariable(value = "id") Long id)
     {
         List<Questions> questions = questionAnswerService.getQuestionsbyCourse(id)
-		  .stream().filter(q -> q.getFlag().equals("1")) .collect(Collectors.toList());
+		  .stream().filter(q -> q.getFlag()!= null && q.getFlag().equals("1")) .collect(Collectors.toList());
 		 
         return questions;
     }
