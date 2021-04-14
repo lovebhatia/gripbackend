@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import com.example.demo.configuration.JwtTokenProvider;
 import com.example.demo.model.AuthenticationRequest;
+import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +44,12 @@ public class UserContoller1 {
     JwtTokenProvider jwtTokenProvider;
     @Autowired
     UserRepository users;
+
+    @Autowired
+    private PasswordEncoder bcryptEncoder;
+    @Autowired
+    private UserRepository userRep;
+
     @PostMapping("/signin")
     public ResponseEntity signin(@RequestBody AuthenticationRequest data) {
         try {
@@ -61,6 +69,11 @@ public class UserContoller1 {
         }
     }
 
-
-
+    @PostMapping("/register")
+    public User save(@RequestBody User user) {
+		User newUser = new User();
+		newUser.setUsername(user.getUsername());
+		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+		return userRep.save(newUser);
+	}
 }
