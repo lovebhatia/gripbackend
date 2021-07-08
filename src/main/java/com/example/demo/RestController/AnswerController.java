@@ -3,6 +3,7 @@ package com.example.demo.RestController;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,10 +50,19 @@ public class AnswerController {
 
 	@GetMapping(value = "/question/{id}/answer")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<String> getAnswersById(@PathVariable(value = "id") Long id)
+	public Answers getAnswersById(@PathVariable(value = "id") Long id)
 	{
 		System.out.println("love");
-		return answerRepository.getAnswerById(id);
+
+		return answerRepository.getOne(id);
+	}
+
+	@PutMapping(value = "/ans/{id}")
+	public Answers editAnswer(@PathVariable(value = "id") Long id, Answers answer) {
+		System.out.println("test");
+		Answers ans = answerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Answer id not found"));
+		ans.setAns(answer.getAns());
+		return answerRepository.save(ans);
 	}
 }
 

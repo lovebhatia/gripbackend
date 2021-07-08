@@ -31,6 +31,8 @@ public class Questions implements Serializable {
 	private Long question_id;
 	@Column(name = "questions_name",length = 2000)
 	private String questions_name;
+	@Column(name = "description")
+	private String description;
 	@Column(name="year")
 	private int year;
 	@Column(name="likes")
@@ -214,5 +216,12 @@ public class Questions implements Serializable {
 	public void setMatCardFlag(String matCardFlag) {
 		this.matCardFlag = matCardFlag;
 	}
-	
+
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }
+	
