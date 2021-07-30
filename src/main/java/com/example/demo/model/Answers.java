@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
 
 @Entity
 public class Answers {
@@ -31,6 +32,10 @@ public class Answers {
 	private Questions questions;
 	*/
 
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "question_id")
+	private Questions questions;
+
 	public long getId() {
 		return ans_id;
 	}
@@ -43,7 +48,7 @@ public class Answers {
 	public void setAns(String ans) {
 		this.ans = ans;
 	}
-	/*
+
 	public Questions getQuestions() {
 		return questions;
 	}
@@ -51,5 +56,5 @@ public class Answers {
 	public void setQuestions(Questions questions) {
 		this.questions = questions;
 	}
-	*/
+
 }

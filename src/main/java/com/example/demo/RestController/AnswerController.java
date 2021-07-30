@@ -1,12 +1,14 @@
 package com.example.demo.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.example.demo.model.Questions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,14 +54,16 @@ public class AnswerController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Answers getAnswersById(@PathVariable(value = "id") Long id)
 	{
-		System.out.println("love");
-
-		return answerRepository.getOne(id);
+		System.out.println("In Answers");
+		return questionRepository.findById(id).map(question -> {
+			return answerRepository.findByQuestions(question);
+		}).orElseThrow(() -> new ResourceNotFoundException("profile Id not found for :"+ id));
 	}
 
-	@PutMapping(value = "/ans/{id}")
-	public Answers editAnswer(@PathVariable(value = "id") Long id, Answers answer) {
+	@PostMapping(value = "/ans/{id}")
+	public Answers editAnswer(@PathVariable(value = "id") Long id, @RequestBody Answers answer) {
 		System.out.println("test");
+		System.out.println(answer.getAns());
 		Answers ans = answerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Answer id not found"));
 		ans.setAns(answer.getAns());
 		return answerRepository.save(ans);
